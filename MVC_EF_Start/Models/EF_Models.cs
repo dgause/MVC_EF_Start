@@ -32,8 +32,28 @@ namespace MVC_EF_Start.Models
     public float changeOverTime { get; set; }
     public string symbol { get; set; }
   }
+  public class Recipe
+    {
+     public int recipeId { get; set; }
+     public string recipeName { get; set; }
+     public List<Preparation> preparations { get; set; }
+    }
+  public class Ingredient
+    {
+     public int ingredientId { get; set; }
+     public string Name { get; set; }
+     public List<Preparation> preparations { get; set; }
+    }
+  public class Preparation
+    {
+     public int preparationId { get; set; }
+     public string Name { get; set; }
+     public Recipe recipe { get; set; }
+     public Ingredient ingredient { get; set; }
+     public string menu { get; set; }
+    }
 
-  public class ChartRoot
+    public class ChartRoot
   {
     public Quote[] chart { get; set; }
   }
