@@ -55,5 +55,6 @@ namespace MVC_EF_Start.Models
     public class ChartRoot
   {
     public Quote[] chart { get; set; }
+
   }
 }
