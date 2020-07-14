@@ -87,12 +87,41 @@ namespace MVC_EF_Start.Controllers
       dbContext.Companies.Update(CompanyRead1);
       //dbContext.SaveChanges();
       await dbContext.SaveChangesAsync();
-      
-      // DELETE operation
-      //dbContext.Companies.Remove(CompanyRead1);
-      //await dbContext.SaveChangesAsync();
 
-      return View();
+            // DELETE operation
+            //dbContext.Companies.Remove(CompanyRead1);
+            //await dbContext.SaveChangesAsync();
+
+     Recipe MyRecipe = new Recipe();
+     MyRecipe.recipeId = "1";
+     MyRecipe.recipeName = "Chicken Marsala";
+
+     Recipe MyRecipe2 = new Recipe();
+     MyRecipe2.recipeId = "2";
+     MyRecipe2.recipeName = "Salisbury Steak";
+
+     Ingredient MyIngredient = new Ingredient();
+     MyIngredient.ingredientId = "1";
+     MyIngredient.ingredientName = "Chicken";
+
+     Ingredient MyIngredient2 = new Ingredient();
+     MyIngredient2.ingredientId = "2";
+     MyIngredient2.ingredientName = "Beef";
+
+    Preparation MyPreparation = new Preparation();
+    MyPreparation.menu = "Dinner";
+    
+     dbContext.Ingredients.Add(MyIngredient); 
+     dbContext.Ingredients.Add(MyIngredient2);
+     dbContext.Recipes.Add(MyRecipe);
+     dbContext.Recipes.Add(MyRecipe2);
+
+     dbContext.Preparations.Add(MyPreparation);
+
+     dbContext.SaveChanges();
+
+
+            return View();
     }
 
     public ViewResult LINQOperations()
@@ -113,8 +142,25 @@ namespace MVC_EF_Start.Controllers
                               .Quotes
                               .FirstOrDefault();
 
-      return View();
+            Recipe RecipeRead1 = dbContext.Recipes
+                                            .Where(c => c.recipeName == "Chicken Marsala")
+                                            .First();
+
+            Recipe RecipeRead2 = dbContext.Recipes
+                                            .Include(c => c.preparations)
+                                            .Where(c => c.recipeId == "1")
+                                            .First();
+
+            Ingredient Ingredient1 = dbContext.Ingredients
+                                    .Include(c => c.preparations)
+                                    .Where(c => c.ingredientId == "2")
+                                    .FirstOrDefault();
+
+
+
+            return View();
     }
 
-  }
-}
+        }
+
+    }

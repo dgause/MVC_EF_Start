@@ -34,20 +34,19 @@ namespace MVC_EF_Start.Models
   }
   public class Recipe
     {
-     public int recipeId { get; set; }
+     public string recipeId { get; set; }
      public string recipeName { get; set; }
      public List<Preparation> preparations { get; set; }
     }
   public class Ingredient
     {
-     public int ingredientId { get; set; }
-     public string Name { get; set; }
+     public string ingredientId { get; set; }
+     public string ingredientName { get; set; }
      public List<Preparation> preparations { get; set; }
     }
   public class Preparation
-    {
-     public int preparationId { get; set; }
-     public string Name { get; set; }
+    { 
+    public int Id { get; set; }
      public Recipe recipe { get; set; }
      public Ingredient ingredient { get; set; }
      public string menu { get; set; }
